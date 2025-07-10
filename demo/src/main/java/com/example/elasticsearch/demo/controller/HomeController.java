@@ -1,10 +1,7 @@
 package com.example.elasticsearch.demo.controller;
 
 import com.example.elasticsearch.demo.service.ElasticsearchService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/elasticsearch")
@@ -23,5 +20,15 @@ public class HomeController {
     @GetMapping("/_cat/indices/*{key}*")
     public String getIndicesMatchCase(@PathVariable String key) {
         return service.listIndexMatchCase(key);
+    }
+
+    @PutMapping("/create-index/{index}")
+    public String createIndex(@PathVariable String index) {
+        return service.createIndex(index);
+    }
+
+    @DeleteMapping("/delete-index/{index}")
+    public String deleteIndex(@PathVariable String index) {
+        return service.deleteIndex(index);
     }
 }

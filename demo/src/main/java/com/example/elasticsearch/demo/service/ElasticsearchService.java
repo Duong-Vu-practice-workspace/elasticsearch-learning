@@ -30,4 +30,14 @@ public class ElasticsearchService {
         String url = String.format("http://%s/_cat/indices/*%s*?v", uri, key);
         return this.restClient.get().uri(url).retrieve().body(String.class);
     }
+
+    public String createIndex(String index) {
+        String url = String.format("http://%s/%s", uri, index);
+        return this.restClient.put().uri(url).retrieve().body(String.class);
+    }
+
+    public String deleteIndex(String index) {
+        String url = String.format("http://%s/%s", uri, index);
+        return this.restClient.delete().uri(url).retrieve().body(String.class);
+    }
 }
