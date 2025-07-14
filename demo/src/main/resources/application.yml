@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: demo
-  data:
-    elasticsearch:
-      uris: http://localhost:9200
-elasticsearch:
-  uri: localhost:9200
