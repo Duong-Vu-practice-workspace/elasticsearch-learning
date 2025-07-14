@@ -1,6 +1,9 @@
 package com.example.elasticsearch.playground.sec04.repository;
 
 import com.example.elasticsearch.playground.sec04.entity.Article;
+import org.springframework.data.elasticsearch.annotations.Highlight;
+import org.springframework.data.elasticsearch.annotations.HighlightField;
+import org.springframework.data.elasticsearch.annotations.HighlightParameters;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -20,5 +23,14 @@ public interface ArticleRepository extends ElasticsearchRepository<Article, Stri
                 }
             }
             """)
+    @Highlight(fields = {
+            @HighlightField(
+                    name = "body",
+                    parameters = @HighlightParameters(
+                            preTags = "<b>",
+                            postTags = "</b>"
+                    )
+            )
+    })
     SearchHits<Article> search(String searchTerm);
 }
