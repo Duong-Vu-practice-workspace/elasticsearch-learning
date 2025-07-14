@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.IndexOperations;
 
+import java.util.stream.IntStream;
+
 public class IndexOperationsTest extends AbstractTest {
     private static final Logger log = LoggerFactory.getLogger(IndexOperationsTest.class);
 
@@ -38,6 +40,7 @@ public class IndexOperationsTest extends AbstractTest {
         Assertions.assertTrue(indexOperations.createWithMapping());
         this.verify(indexOperations, 1, 1);
     }
+
 
     private void verify(IndexOperations indexOperations, int expectedShards, int expectedReplicas) {
         var settings = indexOperations.getSettings();
